@@ -25,7 +25,7 @@ class ApiProvider implements ApiProviderContract
     protected $logger;
 
     /**
-     * @param string $token
+     * @param string                   $token
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(string $token, LoggerInterface $logger)
