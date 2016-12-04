@@ -37,6 +37,6 @@ class RelationshipEndpoint extends SingleEndpoint implements RelationshipEndpoin
 
         $response = $this->makeRequest();
 
-        return new RelationshipStatus($response);
+        return new RelationshipStatus($response['data']);
     }
 }

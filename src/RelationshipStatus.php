@@ -26,7 +26,7 @@ class RelationshipStatus implements RelationshipStatusContract
      */
     public function following(): bool
     {
-        return array_get($this->data, 'data.outgoing_status') === 'follows';
+        return array_get($this->data, 'outgoing_status') === 'follows';
     }
 
     /**
@@ -36,6 +36,6 @@ class RelationshipStatus implements RelationshipStatusContract
      */
     public function followedBy(): bool
     {
-        return array_get($this->data, 'data.incoming_status') === 'followed_by';
+        return array_get($this->data, 'incoming_status') === 'followed_by';
     }
 }
