@@ -5,7 +5,7 @@ use Winnerpicker\Instagram\Endpoints\RecentMediaEndpoint;
 class RecentMediaEndpointTest extends PHPUnit_Framework_TestCase
 {
     /** @test */
-    function recent_user_media()
+    function recent_self_user_media()
     {
         $responses = $this->responses('users/self');
 
@@ -18,6 +18,31 @@ class RecentMediaEndpointTest extends PHPUnit_Framework_TestCase
         });
 
         $endpoint = new RecentMediaEndpoint($api);
+
+        $totalCount = 0;
+
+        while ($endpoint->paginate()) {
+            $totalCount += count($endpoint->response());
+        }
+
+        $this->assertEquals(5, $totalCount);
+    }
+
+    /** @test */
+    function recent_other_user_media()
+    {
+        $responses = $this->responses('users/1');
+
+        $api = EndpointTestHelper::apiMock(function ($api) use ($responses) {
+            $responses->each(function ($response) use ($api) {
+                $api->shouldReceive('request')
+                    ->with($response->get('url'), [], true)
+                    ->andReturn($response->get('data'));
+            });
+        });
+
+        $endpoint = new RecentMediaEndpoint($api);
+        $endpoint->fromUser(1);
 
         $totalCount = 0;
 

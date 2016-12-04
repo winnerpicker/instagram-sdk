@@ -6,11 +6,13 @@ interface RecentMediaEndpointContract
 {
     /**
      * Уведомляет класс, что необходимо загружать медиа-объекты
-     * со страницы авторизованного пользователя.
+     * со страницы авторизованного или переданного пользователя.
+     *
+     * @param $userId = 'self'
      *
      * @return \Winnerpicker\Instagram\Contracts\Endpoints\RecentMediaEndpointContract
      */
-    public function fromUser();
+    public function fromUser($userId = 'self');
 
     /**
      * Уведомляет класс, что необходимо загружать медиа-объекты

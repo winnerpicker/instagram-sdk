@@ -16,6 +16,11 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
     /**
      * @var string
      */
+    protected $userId = 'self';
+
+    /**
+     * @var string
+     */
     protected $tag;
 
     /**
@@ -34,7 +39,7 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
 
         switch ($this->loadFrom) {
             case 'user':
-                $baseUrl .= 'users/self';
+                $baseUrl .= 'users/'.$this->userId;
                 break;
             case 'tag':
                 $baseUrl .= 'tags/'.$this->tag;
@@ -51,13 +56,16 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
 
     /**
      * Уведомляет класс, что необходимо загружать медиа-объекты
-     * со страницы авторизованного пользователя.
+     * со страницы авторизованного или переданного пользователя.
+     *
+     * @param $userId = 'self'
      *
      * @return \Winnerpicker\Instagram\Contracts\Endpoints\RecentMediaEndpointContract
      */
-    public function fromUser()
+    public function fromUser($userId = 'self')
     {
         $this->loadFrom = 'user';
+        $this->userId = $userId;
         $this->url = $this->endpointUrl();
 
         return $this;
