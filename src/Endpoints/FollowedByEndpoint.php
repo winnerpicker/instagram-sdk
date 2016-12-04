@@ -2,10 +2,11 @@
 
 namespace Winnerpicker\Instagram\Endpoints;
 
+use Winnerpicker\Instagram\Contracts\EndpointContract;
 use Winnerpicker\Instagram\Contracts\Endpoints\FollowedByEndpointContract;
 use Winnerpicker\Instagram\PaginationEndpoint;
 
-class FollowedByEndpoint extends PaginationEndpoint implements FollowedByEndpointContract
+class FollowedByEndpoint extends PaginationEndpoint implements FollowedByEndpointContract, EndpointContract
 {
     /**
      * Возвращает начальный URL эндпоинта.

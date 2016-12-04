@@ -58,6 +58,12 @@ abstract class PaginationEndpoint extends AbstractEndpoint implements Pagination
      */
     public function response(): array
     {
-        return array_get($this->response, 'data', []);
+        $responseData = array_get($this->response, 'data', []);
+
+        if (method_exists($this, 'transformResponse')) {
+            return $this->transformResponse($responseData);
+        }
+
+        return $responseData;
     }
 }
