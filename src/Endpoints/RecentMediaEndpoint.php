@@ -19,6 +19,11 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
     protected $tag;
 
     /**
+     * @var int
+     */
+    protected $locationId;
+
+    /**
      * Возвращает начальный URL эндпоинта.
      *
      * @return string
@@ -33,6 +38,9 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
                 break;
             case 'tag':
                 $baseUrl .= 'tags/'.$this->tag;
+                break;
+            case 'location':
+                $baseUrl .= 'locations/'.$this->locationId;
                 break;
         }
 
@@ -50,6 +58,7 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
     public function fromUser()
     {
         $this->loadFrom = 'user';
+        $this->url = $this->endpointUrl();
 
         return $this;
     }
@@ -66,6 +75,24 @@ class RecentMediaEndpoint extends PaginationEndpoint implements RecentMediaEndpo
     {
         $this->loadFrom = 'tag';
         $this->tag = $tag;
+        $this->url = $this->endpointUrl();
+
+        return $this;
+    }
+
+    /**
+     * Уведомляет класс, что необходимо загружать медиа-объекты
+     * из определенной локации.
+     *
+     * @param int $locationId
+     *
+     * @return \Winnerpicker\Instagram\Contracts\Endpoints\RecentMediaEndpointContract
+     */
+    public function fromLocation($locationId)
+    {
+        $this->loadFrom = 'location';
+        $this->locationId = $locationId;
+        $this->url = $this->endpointUrl();
 
         return $this;
     }
