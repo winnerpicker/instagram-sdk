@@ -7,10 +7,16 @@ class SingleEndpoint extends AbstractEndpoint
     /**
      * Выполняет API-запрос для текущего эндпоинта.
      *
-     * @return mixed
+     * @return array
      */
     public function makeRequest()
     {
-        return $this->api->request($this->endpointUrl());
+        $responseData = $this->api->request($this->endpointUrl())->data();
+
+        if (method_exists($this, 'transformResponse')) {
+            return $this->transformResponse($responseData);
+        }
+
+        return $responseData;
     }
 }

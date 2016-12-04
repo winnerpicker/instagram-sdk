@@ -4,7 +4,7 @@ namespace Winnerpicker\Instagram\Endpoints;
 
 use Winnerpicker\Instagram\Contracts\EndpointContract;
 use Winnerpicker\Instagram\Contracts\Endpoints\MediaEndpointContract;
-use Winnerpicker\Instagram\Media;
+use Winnerpicker\Instagram\Entities\Media;
 use Winnerpicker\Instagram\SingleEndpoint;
 
 class MediaEndpoint extends SingleEndpoint implements MediaEndpointContract, EndpointContract
@@ -44,16 +44,14 @@ class MediaEndpoint extends SingleEndpoint implements MediaEndpointContract, End
      *
      * @param int $id
      *
-     * @return \Winnerpicker\Instagram\Contracts\MediaContract
+     * @return \Winnerpicker\Instagram\Contracts\Entities\MediaContract
      */
     public function getById($id)
     {
         $this->loadFrom = 'id';
         $this->mediaId = $id;
 
-        $response = $this->makeRequest();
-
-        return new Media(array_get($response, 'data', []));
+        return new Media($this->makeRequest());
     }
 
     /**
@@ -61,15 +59,13 @@ class MediaEndpoint extends SingleEndpoint implements MediaEndpointContract, End
      *
      * @param string $shortcode
      *
-     * @return \Winnerpicker\Instagram\Contracts\MediaContract
+     * @return \Winnerpicker\Instagram\Contracts\Entities\MediaContract
      */
     public function getByShortcode(string $shortcode)
     {
         $this->loadFrom = 'shortcode';
         $this->shortcode = $shortcode;
 
-        $response = $this->makeRequest();
-
-        return new Media(array_get($response, 'data', []));
+        return new Media($this->makeRequest());
     }
 }

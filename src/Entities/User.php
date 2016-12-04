@@ -1,10 +1,10 @@
 <?php
 
-namespace Winnerpicker\Instagram;
+namespace Winnerpicker\Instagram\Entities;
 
-use Winnerpicker\Instagram\Contracts\InstagramUserContract;
+use Winnerpicker\Instagram\Contracts\Entities\UserContract;
 
-class InstagramUser implements InstagramUserContract
+class User implements UserContract
 {
     /**
      * @var int

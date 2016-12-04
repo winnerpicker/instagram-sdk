@@ -12,7 +12,7 @@ class TagEndpointTest extends PHPUnit_Framework_TestCase
         $api = EndpointTestHelper::apiMock(function ($api) use ($response) {
             $api->shouldReceive('request')
                 ->with($response->get('url'))
-                ->andReturn($response->get('data'));
+                ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
         });
 
         $endpoint = new TagEndpoint($api);

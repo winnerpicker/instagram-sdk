@@ -4,7 +4,7 @@ namespace Winnerpicker\Instagram\Endpoints;
 
 use Winnerpicker\Instagram\Contracts\EndpointContract;
 use Winnerpicker\Instagram\Contracts\Endpoints\RelationshipEndpointContract;
-use Winnerpicker\Instagram\RelationshipStatus;
+use Winnerpicker\Instagram\Entities\Relationship;
 use Winnerpicker\Instagram\SingleEndpoint;
 
 class RelationshipEndpoint extends SingleEndpoint implements RelationshipEndpointContract, EndpointContract
@@ -29,14 +29,14 @@ class RelationshipEndpoint extends SingleEndpoint implements RelationshipEndpoin
      *
      * @param int $userId
      *
-     * @return \Winnerpicker\Instagram\Contracts\RelationshipStatusContract
+     * @return \Winnerpicker\Instagram\Contracts\Entities\RelationshipContract
      */
     public function getStatus(int $userId)
     {
         $this->userId = $userId;
 
-        $response = $this->makeRequest();
+        $responseData = $this->makeRequest();
 
-        return new RelationshipStatus($response['data']);
+        return new Relationship($responseData);
     }
 }

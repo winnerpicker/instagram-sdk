@@ -2,12 +2,12 @@
 
 namespace Winnerpicker\Instagram;
 
-use Winnerpicker\Instagram\Contracts\ApiProviderContract;
+use Winnerpicker\Instagram\Contracts\Api\ApiProviderContract;
 
 abstract class AbstractEndpoint
 {
     /**
-     * @var \Winnerpicker\Instagram\Contracts\ApiProviderContract
+     * @var \Winnerpicker\Instagram\Contracts\Api\ApiProviderContract
      */
     protected $api;
 
@@ -22,7 +22,7 @@ abstract class AbstractEndpoint
     protected $url;
 
     /**
-     * @param \Winnerpicker\Instagram\Contracts\ApiProviderContract $api
+     * @param \Winnerpicker\Instagram\Contracts\Api\ApiProviderContract $api
      */
     public function __construct(ApiProviderContract $api)
     {

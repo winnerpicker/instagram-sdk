@@ -15,11 +15,11 @@ class FollowedByEndpointTest extends PHPUnit_Framework_TestCase
 
             $api->shouldReceive('request')
                 ->with($firstResponse->get('url'), [], true)
-                ->andReturn($firstResponse->get('data'));
+                ->andReturn(EndpointTestHelper::toApiResponse($firstResponse->get('data')));
 
             $api->shouldReceive('request')
                 ->with($secondResponse->get('url'), [], true)
-                ->andReturn($secondResponse->get('data'));
+                ->andReturn(EndpointTestHelper::toApiResponse($secondResponse->get('data')));
         });
 
         $endpoint = new FollowedByEndpoint($api);

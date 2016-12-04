@@ -1,8 +1,8 @@
 <?php
 
-namespace Winnerpicker\Instagram;
+namespace Winnerpicker\Instagram\Entities;
 
-use Winnerpicker\Instagram\Contracts\TagContract;
+use Winnerpicker\Instagram\Contracts\Entities\TagContract;
 
 class Tag implements TagContract
 {

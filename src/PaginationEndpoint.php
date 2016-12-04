@@ -42,7 +42,7 @@ abstract class PaginationEndpoint extends AbstractEndpoint implements Pagination
 
         $this->response = $this->api->request($this->url, [], true);
 
-        $nextUrl = array_get($this->response, 'pagination.next_url');
+        $nextUrl = $this->response->nextPageUrl();
 
         if (!is_null($nextUrl)) {
             return $this->url = $nextUrl;
@@ -58,7 +58,7 @@ abstract class PaginationEndpoint extends AbstractEndpoint implements Pagination
      */
     public function response(): array
     {
-        $responseData = array_get($this->response, 'data', []);
+        $responseData = $this->response->data();
 
         if (method_exists($this, 'transformResponse')) {
             return $this->transformResponse($responseData);

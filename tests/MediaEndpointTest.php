@@ -13,7 +13,7 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
             $responses->each(function ($response) use ($api) {
                 $api->shouldReceive('request')
                     ->with($response->get('url'))
-                    ->andReturn($response->get('data'));
+                    ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
             });
         });
 
@@ -37,7 +37,7 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
             $responses->each(function ($response) use ($api) {
                 $api->shouldReceive('request')
                     ->with($response->get('url'))
-                    ->andReturn($response->get('data'));
+                    ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
             });
         });
 

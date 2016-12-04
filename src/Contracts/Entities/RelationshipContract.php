@@ -1,8 +1,8 @@
 <?php
 
-namespace Winnerpicker\Instagram\Contracts;
+namespace Winnerpicker\Instagram\Contracts\Entities;
 
-interface RelationshipStatusContract
+interface RelationshipContract
 {
     /**
      * Проверяет, подписан ли текущий пользователь на второго пользователя.

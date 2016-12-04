@@ -5,7 +5,7 @@ namespace Winnerpicker\Instagram\Endpoints;
 use Winnerpicker\Instagram\Contracts\EndpointContract;
 use Winnerpicker\Instagram\Contracts\Endpoints\TagEndpointContract;
 use Winnerpicker\Instagram\SingleEndpoint;
-use Winnerpicker\Instagram\Tag;
+use Winnerpicker\Instagram\Entities\Tag;
 
 class TagEndpoint extends SingleEndpoint implements TagEndpointContract, EndpointContract
 {
@@ -29,14 +29,12 @@ class TagEndpoint extends SingleEndpoint implements TagEndpointContract, Endpoin
      *
      * @param string $tagName
      *
-     * @return \Winnerpicker\Instagram\Contracts\TagContract
+     * @return \Winnerpicker\Instagram\Contracts\Entities\TagContract
      */
     public function getTag(string $tagName)
     {
         $this->tagName = $tagName;
 
-        $response = $this->makeRequest();
-
-        return new Tag($response['data']);
+        return new Tag($this->makeRequest());
     }
 }

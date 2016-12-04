@@ -1,10 +1,10 @@
 <?php
 
-namespace Winnerpicker\Instagram;
+namespace Winnerpicker\Instagram\Entities;
 
-use Winnerpicker\Instagram\Contracts\RelationshipStatusContract;
+use Winnerpicker\Instagram\Contracts\Entities\RelationshipContract;
 
-class RelationshipStatus implements RelationshipStatusContract
+class Relationship implements RelationshipContract
 {
     /**
      * @var array

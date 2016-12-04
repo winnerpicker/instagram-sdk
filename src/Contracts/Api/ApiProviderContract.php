@@ -1,6 +1,6 @@
 <?php
 
-namespace Winnerpicker\Instagram\Contracts;
+namespace Winnerpicker\Instagram\Contracts\Api;
 
 interface ApiProviderContract
 {
@@ -15,10 +15,10 @@ interface ApiProviderContract
      * Выполняет запрос к переданному URL.
      *
      * @param string $url
-     * @param array  $params    = []
-     * @param bool   $useRawUrl = false
+     * @param array  $params      = []
+     * @param bool   $usingRawUrl = false
      *
-     * @return \stdClass
+     * @return \Winnerpicker\Instagram\Contracts\Api\ApiResponseContract
      */
-    public function request(string $url, array $params = [], bool $useRawUrl = false);
+    public function request(string $url, array $params = [], bool $usingRawUrl = false);
 }

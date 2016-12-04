@@ -13,7 +13,7 @@ class RecentMediaEndpointTest extends PHPUnit_Framework_TestCase
             $responses->each(function ($response) use ($api) {
                 $api->shouldReceive('request')
                     ->with($response->get('url'), [], true)
-                    ->andReturn($response->get('data'));
+                    ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
             });
         });
 
@@ -37,7 +37,7 @@ class RecentMediaEndpointTest extends PHPUnit_Framework_TestCase
             $responses->each(function ($response) use ($api) {
                 $api->shouldReceive('request')
                     ->with($response->get('url'), [], true)
-                    ->andReturn($response->get('data'));
+                    ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
             });
         });
 
@@ -62,7 +62,7 @@ class RecentMediaEndpointTest extends PHPUnit_Framework_TestCase
             $responses->each(function ($response) use ($api) {
                 $api->shouldReceive('request')
                     ->with($response->get('url'), [], true)
-                    ->andReturn($response->get('data'));
+                    ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
             });
         });
 
@@ -87,7 +87,7 @@ class RecentMediaEndpointTest extends PHPUnit_Framework_TestCase
             $responses->each(function ($response) use ($api) {
                 $api->shouldReceive('request')
                     ->with($response->get('url'), [], true)
-                    ->andReturn($response->get('data'));
+                    ->andReturn(EndpointTestHelper::toApiResponse($response->get('data')));
             });
         });
 

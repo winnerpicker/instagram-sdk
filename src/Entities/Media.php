@@ -1,8 +1,8 @@
 <?php
 
-namespace Winnerpicker\Instagram;
+namespace Winnerpicker\Instagram\Entities;
 
-use Winnerpicker\Instagram\Contracts\MediaContract;
+use Winnerpicker\Instagram\Contracts\Entities\MediaContract;
 
 class Media implements MediaContract
 {

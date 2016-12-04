@@ -1,6 +1,6 @@
 <?php
 
-namespace Winnerpicker\Instagram\Contracts;
+namespace Winnerpicker\Instagram\Contracts\Entities;
 
 interface TagContract
 {

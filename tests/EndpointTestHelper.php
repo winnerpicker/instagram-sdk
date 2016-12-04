@@ -1,19 +1,27 @@
 <?php
 
 use Psr\Log\LoggerInterface;
-use Winnerpicker\Instagram\ApiProvider;
-use Winnerpicker\Instagram\InstagramUser;
+use Winnerpicker\Instagram\Api\ApiProvider;
+use Winnerpicker\Instagram\Api\ApiResponse;
+use Winnerpicker\Instagram\Entities\User;
 
 class EndpointTestHelper
 {
     public static function fakeUser()
     {
-        return new InstagramUser(1, 'api-token');
+        return new User(1, 'api-token');
     }
 
     public static function loggerMock()
     {
         return Mockery::mock(LoggerInterface::class);
+    }
+
+    public static function toApiResponse(array $data, int $rateLimit = 5000, int $rateLimitRemaining = 5000)
+    {
+        $response = new ApiResponse($rateLimit, $rateLimitRemaining);
+
+        return $response->setResponseData($data);
     }
 
     public static function apiMock($mockMethods = null, $callback = null)
