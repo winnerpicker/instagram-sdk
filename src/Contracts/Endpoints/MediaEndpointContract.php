@@ -12,4 +12,13 @@ interface MediaEndpointContract
      * @return \Winnerpicker\Instagram\Contracts\MediaContract
      */
     public function getById($id);
+
+    /**
+     * Возвращает медиа-объект по его ключу.
+     *
+     * @param string $shortcode
+     *
+     * @return \Winnerpicker\Instagram\Contracts\MediaContract
+     */
+    public function getByShortcode(string $shortcode);
 }

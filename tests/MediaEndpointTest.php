@@ -5,9 +5,9 @@ use Winnerpicker\Instagram\Endpoints\MediaEndpoint;
 class MediaEndpointTest extends PHPUnit_Framework_TestCase
 {
     /** @test */
-    function endpoint()
+    function media_by_id()
     {
-        $responses = $this->responses();
+        $responses = $this->responses('1');
 
         $api = EndpointTestHelper::apiMock(function ($api) use ($responses) {
             $responses->each(function ($response) use ($api) {
@@ -25,6 +25,31 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('https://example.org/1_2_3_n.jpg?ig_cache_key=test-cache-key', $image->lowResolutionUrl());
         $this->assertEquals('Test Image with tags #test #tag', $image->captionText());
         $this->assertEquals(2, $image->tagsCount());
+        $this->assertEquals('https://www.instagram.com/shortcode', $image->link());
+    }
+
+    /** @test */
+    function media_by_shortcode()
+    {
+        $responses = $this->responses('shortcode/shortcode');
+
+        $api = EndpointTestHelper::apiMock(function ($api) use ($responses) {
+            $responses->each(function ($response) use ($api) {
+                $api->shouldReceive('request')
+                    ->with($response->get('url'))
+                    ->andReturn($response->get('data'));
+            });
+        });
+
+        $endpoint = new MediaEndpoint($api);
+
+        $image = $endpoint->getByShortcode('shortcode');
+
+        $this->assertEquals(1, $image->id());
+        $this->assertEquals('https://example.org/1_2_3_n.jpg?ig_cache_key=test-cache-key', $image->lowResolutionUrl());
+        $this->assertEquals('Test Image with tags #test #tag', $image->captionText());
+        $this->assertEquals(2, $image->tagsCount());
+        $this->assertEquals('https://www.instagram.com/shortcode', $image->link());
     }
 
     protected function tearDown()
@@ -32,11 +57,11 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
         Mockery::close();
     }
 
-    protected function responses()
+    protected function responses($urlSuffix)
     {
         return collect([
             'image' => collect([
-                'url' => '/v1/media/1',
+                'url' => '/v1/media/'.$urlSuffix,
                 'data' => [
                     'meta' => ['code' => 200],
                     'data' => [
@@ -44,6 +69,7 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
                         'type' => 'image',
                         'comments' => ['count' => 0],
                         'filter' => 'Normal',
+                        'link' => 'https://www.instagram.com/shortcode',
                         'likes' => ['count' => 1],
                         'images' => [
                             'low_resolution' => [

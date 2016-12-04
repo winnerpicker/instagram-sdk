@@ -20,13 +20,23 @@ class Media implements MediaContract
     }
 
     /**
-     * Возвращает ID медиа.
+     * Возвращает ID медиа-объекта.
      *
      * @return string
      */
     public function id()
     {
         return array_get($this->data, 'id');
+    }
+
+    /**
+     * Возвращает URL медиа-объекта.
+     *
+     * @return string
+     */
+    public function link(): string
+    {
+        return array_get($this->data, 'link', '');
     }
 
     /**

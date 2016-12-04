@@ -10,9 +10,19 @@ use Winnerpicker\Instagram\SingleEndpoint;
 class MediaEndpoint extends SingleEndpoint implements MediaEndpointContract, EndpointContract
 {
     /**
+     * @var string
+     */
+    protected $loadFrom = 'id';
+
+    /**
      * @var int
      */
     protected $mediaId;
+
+    /**
+     * @var string
+     */
+    protected $shortcode;
 
     /**
      * Возвращает начальный URL эндпоинта.
@@ -21,7 +31,12 @@ class MediaEndpoint extends SingleEndpoint implements MediaEndpointContract, End
      */
     public function endpointUrl(): string
     {
-        return '/v1/media/'.$this->mediaId;
+        switch ($this->loadFrom) {
+            case 'id':
+                return '/v1/media/'.$this->mediaId;
+            case 'shortcode':
+                return '/v1/media/shortcode/'.$this->shortcode;
+        }
     }
 
     /**
@@ -33,7 +48,25 @@ class MediaEndpoint extends SingleEndpoint implements MediaEndpointContract, End
      */
     public function getById($id)
     {
+        $this->loadFrom = 'id';
         $this->mediaId = $id;
+
+        $response = $this->makeRequest();
+
+        return new Media(array_get($response, 'data', []));
+    }
+
+    /**
+     * Возвращает медиа-объект по его ключу.
+     *
+     * @param string $shortcode
+     *
+     * @return \Winnerpicker\Instagram\Contracts\MediaContract
+     */
+    public function getByShortcode(string $shortcode)
+    {
+        $this->loadFrom = 'shortcode';
+        $this->shortcode = $shortcode;
 
         $response = $this->makeRequest();
 

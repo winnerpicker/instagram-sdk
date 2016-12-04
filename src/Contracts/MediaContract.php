@@ -5,11 +5,18 @@ namespace Winnerpicker\Instagram\Contracts;
 interface MediaContract
 {
     /**
-     * Возвращает ID медиа.
+     * Возвращает ID медиа-объекта.
      *
      * @return string
      */
     public function id();
+
+    /**
+     * Возвращает URL медиа-объекта.
+     *
+     * @return string
+     */
+    public function link(): string;
 
     /**
      * Возвращает URL изображения средних размеров.
