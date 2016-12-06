@@ -17,4 +17,11 @@ interface EndpointContract
      * @return mixed
      */
     public function makeRequest();
+
+    /**
+     * Возвращет инстанс API-ответа.
+     *
+     * @return \Winnerpicker\Instagram\Contracts\Api\ApiResponseContract
+     */
+    public function apiResponse();
 }

@@ -29,4 +29,14 @@ abstract class AbstractEndpoint
         $this->api = $api;
         $this->url = $this->endpointUrl();
     }
+
+    /**
+     * Возвращет инстанс API-ответа.
+     *
+     * @return \Winnerpicker\Instagram\Contracts\Api\ApiResponseContract
+     */
+    public function apiResponse()
+    {
+        return $this->response;
+    }
 }
