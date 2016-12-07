@@ -23,8 +23,13 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $image->id());
         $this->assertEquals('https://example.org/1_2_3_n.jpg?ig_cache_key=test-cache-key', $image->lowResolutionUrl());
-        $this->assertEquals('Test Image with tags #test #tag', $image->captionText());
+        $this->assertEquals('Test Image with tags #test #tag and @firstMention and second @mention.', $image->captionText());
         $this->assertEquals(2, $image->tagsCount());
+        $this->assertEquals(2, $image->mentionsCount());
+        $this->assertEquals(1, $image->usersInPhotoCount());
+        $this->assertEquals(3, $image->allTaggedUsersCount());
+        $this->assertEquals(1, $image->likesCount());
+        $this->assertEquals(2, $image->commentsCount());
         $this->assertEquals('https://www.instagram.com/shortcode', $image->link());
     }
 
@@ -47,8 +52,13 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, $image->id());
         $this->assertEquals('https://example.org/1_2_3_n.jpg?ig_cache_key=test-cache-key', $image->lowResolutionUrl());
-        $this->assertEquals('Test Image with tags #test #tag', $image->captionText());
+        $this->assertEquals('Test Image with tags #test #tag and @firstMention and second @mention.', $image->captionText());
         $this->assertEquals(2, $image->tagsCount());
+        $this->assertEquals(2, $image->mentionsCount());
+        $this->assertEquals(1, $image->usersInPhotoCount());
+        $this->assertEquals(3, $image->allTaggedUsersCount());
+        $this->assertEquals(1, $image->likesCount());
+        $this->assertEquals(2, $image->commentsCount());
         $this->assertEquals('https://www.instagram.com/shortcode', $image->link());
     }
 
@@ -67,7 +77,7 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
                     'data' => [
                         'tags' => ['test', 'tag'],
                         'type' => 'image',
-                        'comments' => ['count' => 0],
+                        'comments' => ['count' => 2],
                         'filter' => 'Normal',
                         'link' => 'https://www.instagram.com/shortcode',
                         'likes' => ['count' => 1],
@@ -88,10 +98,18 @@ class MediaEndpointTest extends PHPUnit_Framework_TestCase
                                 'height' => 640,
                             ],
                         ],
-                        'users_in_photo' => [],
+                        'users_in_photo' => [
+                            [
+                                'position' => ['x' => 0.7, 'y' => 0.378125],
+                                'user' => [
+                                    'username' => 'user2',
+                                    'id' => 2,
+                                ],
+                            ]
+                        ],
                         'caption' => [
                             'created_time' => 1,
-                            'text' => 'Test Image with tags #test #tag',
+                            'text' => 'Test Image with tags #test #tag and @firstMention and second @mention.',
                             'from' => [
                                 'username' => 'user1',
                                 'id' => 1,
