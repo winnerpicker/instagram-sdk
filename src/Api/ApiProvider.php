@@ -114,8 +114,8 @@ class ApiProvider implements ApiProviderContract
         }
 
         $body = $response->getBody();
-        $rateLimit = intval($response->getHeader('X-RateLimit-Limit'));
-        $rateLimitRemaining = intval($response->getHeader('X-RateLimit-Remaining'));
+        $rateLimit = intval(array_get($response->getHeader('X-RateLimit-Limit'), 0, 0));
+        $rateLimitRemaining = intval(array_get($response->getHeader('X-RateLimit-Remaining'), 0, 0));
 
         $apiResponse = new ApiResponse($rateLimit, $rateLimitRemaining);
 
