@@ -119,6 +119,10 @@ class ApiResponse implements ApiResponseContract
      */
     public function nextPageUrl()
     {
+        if ($this->rateLimitReached()) {
+            return;
+        }
+
         return array_get($this->responseData, 'pagination.next_url');
     }
 
